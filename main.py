@@ -9,7 +9,7 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
-
+zoom = 1.7
 #game settings
 map_width, map_height = 1600, 1200
 world = pygame.Surface((map_width, map_height))
@@ -24,7 +24,8 @@ BLACK = (0, 0, 0)
 
 #player and camera
 player = Playerclass(400, 300)
-camera = Cameraclass(WIDTH, HEIGHT)
+camera = Cameraclass(WIDTH, HEIGHT, 2)
+camera.set_world_size(map_width, map_height)
 
 #MAIN LOOP
 running = True
@@ -40,6 +41,8 @@ while running:
     game_map.draw(world)
 
     #blit visible part of world to screen using camera offset
-    screen.blit(world, (0, 0), camera.get_rect())
+    camera_rect = camera.get_rect()
+    scaled_view = pygame.transform.scale(world.subsurface(camera_rect), (WIDTH, HEIGHT))
+    screen.blit(scaled_view, (0, 0))
     pygame.display.update()
 pygame.quit()

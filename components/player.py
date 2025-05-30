@@ -8,6 +8,21 @@ class Playerclass:
     def update(self, collisions):
         keys = pygame.key.get_pressed()
         dx = dy = 0
+
+        for rect in collisions:
+            if self.rect.colliderect(rect):
+                if dx > 0: 
+                    self.rect.right = rect.left
+                elif dx < 0: 
+                    self.rect.left = rect.right
+        for rect in collisions:
+            if self.rect.colliderect(rect):
+                if dy > 0: 
+                    self.rect.top = rect.bottom
+                elif dy < 0: 
+                    self.rect.bottom = rect.top
+
+                    
         if keys[pygame.K_LEFT]: dx -= 1
         if keys[pygame.K_RIGHT]: dx += 1
         if keys[pygame.K_UP]: dy += 1
@@ -22,6 +37,7 @@ class Playerclass:
                     self.rect.top = rect.bottom
                 elif dy < 0: 
                     self.rect.bottom = rect.top
+                    
         self.rect.x += dx
         for rect in collisions:
             if self.rect.colliderect(rect):
