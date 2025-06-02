@@ -4,24 +4,29 @@ from settings import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstacle_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load('assets/memo.png').convert_alpha()
+        self.rawimage = pygame.image.load('assets/memo.png').convert_alpha()
+        self.image = pygame.transform.scale(self.rawimage, (self.rawimage.get_width() * ZOOM, self.rawimage.get_height() * ZOOM))
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0, -15)
         self.direction = pygame.math.Vector2()
         self.speed = 5
         self.obstacle_sprites = obstacle_sprites
+    def yip(self):
+        pass
     def input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_f]:
+            self.yip()
+        if keys[pygame.K_w]:
             self.direction.y = -1
-        elif keys[pygame.K_DOWN]:
+        elif keys[pygame.K_s]:
             self.direction.y = 1
         else:
             self.direction.y = 0
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_a]:
             self.direction.x = -1
-        elif keys[pygame.K_RIGHT]:
+        elif keys[pygame.K_d]:
             self.direction.x = 1
         else:
             self.direction.x = 0
