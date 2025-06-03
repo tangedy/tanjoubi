@@ -3,7 +3,8 @@
 WIDTH = 640
 HEIGHT = 480
 FPS = 60
-TILESIZE = 32
+TILESIZE = 64
+ZOOM = 2.5
 
 world_map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
