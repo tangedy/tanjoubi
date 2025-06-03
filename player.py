@@ -11,8 +11,12 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 5
         self.obstacle_sprites = obstacle_sprites
+    def yip(self):
+        pass
     def input(self):
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_f]:
+            self.yip()
         if keys[pygame.K_w]:
             self.direction.y = -1
         elif keys[pygame.K_s]:
